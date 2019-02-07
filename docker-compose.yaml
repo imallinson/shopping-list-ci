@@ -1,0 +1,32 @@
+version: "3.7"
+services: 
+  back-end: 
+    build: ../shopping-list-java
+    image: imallinson/project-back-end
+    container_name: back-end
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+  front-end: 
+    build: ../shopping-list-reactjs
+    image: imallinson/project-front-end
+    container_name: front_end
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+  jenkins: 
+    build: ../jenkins
+    image: imallinson/jenkins
+    container_name: jenkins
+    ports: 
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./jenkins/jobs:/var/jenkins_home/jobs:Z"
+  nginx:
+    build: ../shopping-list-nginx
+    image: imallinson/nginx
+    container_name: nginx
+    depends_on: 
+      - back-end
+      - front-end    
+    ports:
+      - "80:80"
