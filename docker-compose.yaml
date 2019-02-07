@@ -13,8 +13,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
   jenkins: 
-    build: ../jenkins
-    image: imallinson/jenkins
+    image: bobcrutchley/jenkins
     container_name: jenkins
     ports: 
       - "8080:8080"
@@ -30,3 +29,4 @@ services:
       - front-end    
     ports:
       - "80:80"
+      - "443:443"
