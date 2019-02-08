@@ -4,14 +4,10 @@ services:
     build: ../shopping-list-java
     image: imallinson/project-back-end
     container_name: back-end
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
   front-end: 
     build: ../shopping-list-reactjs
     image: imallinson/project-front-end
     container_name: front_end
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
   jenkins: 
     image: bobcrutchley/jenkins
     container_name: jenkins
@@ -19,7 +15,7 @@ services:
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "./jenkins/jobs:/var/jenkins_home/jobs:Z"
+      - "./jenkins/jobs:/var/jenkins_home/jobs"
   nginx:
     build: .
     image: imallinson/nginx
